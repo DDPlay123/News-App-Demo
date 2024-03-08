@@ -33,7 +33,9 @@ import mai.project.news_app.ui.theme.NewsAppTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen() {
+fun OnBoardingScreen(
+    event: (OnBoardingEvent) -> Unit = {}
+) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -90,8 +92,8 @@ fun OnBoardingScreen() {
                     text = buttonState[1]
                 ) {
                     scope.launch {
-                        if (pageState.currentPage == pages.size) {
-                            // TODO: 跳到主畫面
+                        if (pageState.currentPage == pages.size - 1) {
+                            event.invoke(OnBoardingEvent.SaveAppEntry)
                         } else {
                             pageState.animateScrollToPage(pageState.currentPage + 1)
                         }
