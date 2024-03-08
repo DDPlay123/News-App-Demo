@@ -89,10 +89,10 @@ dependencies {
     // Datastore
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
-    // Compose Foundation
+    // Compose Foundation (基礎組件)
     implementation("androidx.compose.foundation:foundation:1.6.3")
 
-    // Accompanist
+    // Accompanist (用來完善Jetpack Compose的功能)
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.4-beta")
 
     // Paging 3
