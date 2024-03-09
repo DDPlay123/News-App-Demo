@@ -18,6 +18,7 @@ import kotlinx.coroutines.flow.flowOf
 import mai.project.news_app.domain.model.Article
 import mai.project.news_app.presentation.Dimens.ExtraSmallPadding2
 import mai.project.news_app.presentation.Dimens.MediumPadding1
+import mai.project.news_app.presentation.Dimens.SmallPadding1
 
 @Composable
 fun ArticleList(
@@ -78,7 +79,7 @@ private fun ShimmerEffect() {
     ) {
         repeat(10) {
             ArticleCardShimmerEffect(
-                modifier = Modifier.padding(horizontal = MediumPadding1)
+                modifier = Modifier.padding(horizontal = SmallPadding1)
             )
         }
     }

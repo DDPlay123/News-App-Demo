@@ -1,4 +1,4 @@
-package mai.project.news_app.data.repository
+package mai.project.news_app.data.repositoryImpl
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -6,6 +6,7 @@ import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import mai.project.news_app.data.remote.NewsApi
 import mai.project.news_app.data.remote.NewsPagingSource
+import mai.project.news_app.data.remote.SearchNewsPagingSource
 import mai.project.news_app.domain.model.Article
 import mai.project.news_app.domain.repository.NewsRepository
 
@@ -23,6 +24,22 @@ class NewsRepositoryImpl(
                 NewsPagingSource(
                     newsApi = newsApi,
                     sources = sources.joinToString(separator = ",")
+                )
+            }
+        ).flow
+    }
+
+    override fun searchNews(sources: List<String>, searchQuery: String): Flow<PagingData<Article>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                SearchNewsPagingSource(
+                    newsApi = newsApi,
+                    sources = sources.joinToString(separator = ","),
+                    searchQuery = searchQuery
                 )
             }
         ).flow

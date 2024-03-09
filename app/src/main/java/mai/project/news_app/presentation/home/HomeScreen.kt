@@ -98,7 +98,7 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(SmallPadding1))
 
         ArticleList(
-            modifier = Modifier.padding(horizontal = MediumPadding1),
+            modifier = Modifier.padding(horizontal = SmallPadding1),
             articles = articles,
         ) { article ->
             navigate(Route.DetailsScreen.route)

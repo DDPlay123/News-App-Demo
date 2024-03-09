@@ -5,11 +5,14 @@ import kotlinx.coroutines.flow.Flow
 import mai.project.news_app.domain.model.Article
 import mai.project.news_app.domain.repository.NewsRepository
 
-class GetNews(
+class SearchNews(
     private val newsRepository: NewsRepository
 ) {
 
-    operator fun invoke(sources: List<String>): Flow<PagingData<Article>> {
-        return newsRepository.getNews(sources)
+    operator fun invoke(
+        query: String,
+        sources: List<String>
+    ): Flow<PagingData<Article>> {
+        return newsRepository.searchNews(searchQuery = query, sources = sources)
     }
 }

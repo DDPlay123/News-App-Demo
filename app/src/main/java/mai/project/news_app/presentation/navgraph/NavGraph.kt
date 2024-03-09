@@ -1,6 +1,5 @@
 package mai.project.news_app.presentation.navgraph
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
@@ -12,6 +11,8 @@ import mai.project.news_app.presentation.home.HomeScreen
 import mai.project.news_app.presentation.home.HomeViewModel
 import mai.project.news_app.presentation.onboarding.OnBoardingScreen
 import mai.project.news_app.presentation.onboarding.OnBoardingViewModel
+import mai.project.news_app.presentation.search.SearchScreen
+import mai.project.news_app.presentation.search.SearchViewModel
 
 @Composable
 fun NavGraph(
@@ -42,12 +43,17 @@ fun NavGraph(
             composable(
                 route = Route.NewsNavigatorScreen.route
             ) {
-                val viewModel: HomeViewModel = hiltViewModel()
-                val artists = viewModel.news.collectAsLazyPagingItems()
-                HomeScreen(
-                    articles = artists,
-                    navigate = { route -> navController.navigate(route) }
-                )
+                val viewModel: SearchViewModel = hiltViewModel()
+                SearchScreen(
+                    state = viewModel.state.value,
+                    event = viewModel::onEvent
+                ) {}
+//                val viewModel: HomeViewModel = hiltViewModel()
+//                val artists = viewModel.news.collectAsLazyPagingItems()
+//                HomeScreen(
+//                    articles = artists,
+//                    navigate = { route -> navController.navigate(route) }
+//                )
             }
         }
     }
