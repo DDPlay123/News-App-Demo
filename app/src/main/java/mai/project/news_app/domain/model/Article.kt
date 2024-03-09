@@ -1,9 +1,15 @@
 package mai.project.news_app.domain.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import mai.project.news_app.util.Constants.ARTICLE_TABLE
+
+@Entity(tableName = ARTICLE_TABLE)
 data class Article(
     val author: String,
     val title: String,
     val description: String,
+    @PrimaryKey
     val url: String,
     val urlToImage: String,
     val publishedAt: String,
