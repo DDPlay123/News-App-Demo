@@ -7,6 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import mai.project.news_app.data.local.NewsDao
 import mai.project.news_app.data.local.NewsDatabase
 import mai.project.news_app.data.manager.LocalUserManagerImpl
 import mai.project.news_app.data.remote.NewsApi
@@ -16,9 +17,12 @@ import mai.project.news_app.domain.repository.NewsRepository
 import mai.project.news_app.domain.usecases.appEntry.AppEntryUseCases
 import mai.project.news_app.domain.usecases.appEntry.ReadAppEntry
 import mai.project.news_app.domain.usecases.appEntry.SaveAppEntry
+import mai.project.news_app.domain.usecases.news.DeleteArticle
 import mai.project.news_app.domain.usecases.news.GetNews
 import mai.project.news_app.domain.usecases.news.NewsUseCases
 import mai.project.news_app.domain.usecases.news.SearchNews
+import mai.project.news_app.domain.usecases.news.SelectArticles
+import mai.project.news_app.domain.usecases.news.UpsertArticle
 import mai.project.news_app.util.Constants
 import mai.project.news_app.util.Constants.DATABASE_NAME
 import retrofit2.Retrofit
@@ -63,10 +67,14 @@ object AppModule {
     @Singleton
     @Provides
     fun provideNewsUseCases(
-        newsRepository: NewsRepository
+        newsRepository: NewsRepository,
+        newsDao: NewsDao
     ) = NewsUseCases(
         getNews = GetNews(newsRepository),
-        searchNews = SearchNews(newsRepository)
+        searchNews = SearchNews(newsRepository),
+        upsertArticle = UpsertArticle(newsDao),
+        deleteArticle = DeleteArticle(newsDao),
+        selectArticles = SelectArticles(newsDao),
     )
 
     @Provides

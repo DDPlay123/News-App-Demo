@@ -23,6 +23,28 @@ import mai.project.news_app.presentation.Dimens.SmallPadding1
 @Composable
 fun ArticleList(
     modifier: Modifier = Modifier,
+    articles: List<Article>,
+    onItemClick: (Article) -> Unit
+) {
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(MediumPadding1),
+        contentPadding = PaddingValues(all = ExtraSmallPadding2),
+    ) {
+        items(count = articles.size) { index ->
+            articles[index].let { article ->
+                ArticleCard(
+                    article = article,
+                    onClick = { onItemClick(article) }
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun ArticleList(
+    modifier: Modifier = Modifier,
     articles: LazyPagingItems<Article>,
     onItemClick: (Article) -> Unit
 ) {
