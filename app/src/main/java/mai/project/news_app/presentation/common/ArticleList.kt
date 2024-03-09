@@ -26,19 +26,23 @@ fun ArticleList(
     articles: List<Article>,
     onItemClick: (Article) -> Unit
 ) {
-    LazyColumn(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(MediumPadding1),
-        contentPadding = PaddingValues(all = ExtraSmallPadding2),
-    ) {
-        items(count = articles.size) { index ->
-            articles[index].let { article ->
-                ArticleCard(
-                    article = article,
-                    onClick = { onItemClick(article) }
-                )
+    if (articles.isNotEmpty()) {
+        LazyColumn(
+            modifier = modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(MediumPadding1),
+            contentPadding = PaddingValues(all = ExtraSmallPadding2),
+        ) {
+            items(count = articles.size) { index ->
+                articles[index].let { article ->
+                    ArticleCard(
+                        article = article,
+                        onClick = { onItemClick(article) }
+                    )
+                }
             }
         }
+    } else {
+        EmptyScreen()
     }
 }
 
@@ -87,6 +91,11 @@ private fun handlePagingResult(
 
         error != null -> {
             EmptyScreen(error = error)
+            false
+        }
+
+        articles.itemCount == 0 -> {
+            EmptyScreen()
             false
         }
 
