@@ -15,6 +15,9 @@ interface NewsDao {
     @Query("SELECT * FROM $ARTICLE_TABLE ORDER BY publishedAt DESC")
     fun getArticles(): Flow<List<Article>>
 
+    @Query("SELECT * FROM $ARTICLE_TABLE WHERE url = :url")
+    suspend fun getArticle(url: String): Article?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(article: Article)
 

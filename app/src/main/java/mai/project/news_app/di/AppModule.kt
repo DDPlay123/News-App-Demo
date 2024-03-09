@@ -21,6 +21,7 @@ import mai.project.news_app.domain.usecases.news.DeleteArticle
 import mai.project.news_app.domain.usecases.news.GetNews
 import mai.project.news_app.domain.usecases.news.NewsUseCases
 import mai.project.news_app.domain.usecases.news.SearchNews
+import mai.project.news_app.domain.usecases.news.SelectArticle
 import mai.project.news_app.domain.usecases.news.SelectArticles
 import mai.project.news_app.domain.usecases.news.UpsertArticle
 import mai.project.news_app.util.Constants
@@ -61,20 +62,21 @@ object AppModule {
     @Provides
     @Singleton
     fun provideNewsRepository(
-        newsApi: NewsApi
-    ): NewsRepository = NewsRepositoryImpl(newsApi)
+        newsApi: NewsApi,
+        newsDao: NewsDao
+    ): NewsRepository = NewsRepositoryImpl(newsApi, newsDao)
 
     @Singleton
     @Provides
     fun provideNewsUseCases(
         newsRepository: NewsRepository,
-        newsDao: NewsDao
     ) = NewsUseCases(
         getNews = GetNews(newsRepository),
         searchNews = SearchNews(newsRepository),
-        upsertArticle = UpsertArticle(newsDao),
-        deleteArticle = DeleteArticle(newsDao),
-        selectArticles = SelectArticles(newsDao),
+        upsertArticle = UpsertArticle(newsRepository),
+        deleteArticle = DeleteArticle(newsRepository),
+        selectArticles = SelectArticles(newsRepository),
+        selectArticle = SelectArticle(newsRepository)
     )
 
     @Provides

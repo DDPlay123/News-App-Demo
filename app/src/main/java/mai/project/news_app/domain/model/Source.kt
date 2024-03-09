@@ -1,9 +1,13 @@
 package mai.project.news_app.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Source(
     val id: String?,
     val name: String
-) {
+) : Parcelable {
     override fun toString(): String {
         return "$id,$name"
     }

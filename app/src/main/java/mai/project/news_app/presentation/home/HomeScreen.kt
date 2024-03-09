@@ -34,14 +34,14 @@ import mai.project.news_app.presentation.Dimens.MediumPadding1
 import mai.project.news_app.presentation.Dimens.SmallPadding1
 import mai.project.news_app.presentation.common.ArticleList
 import mai.project.news_app.presentation.common.SearchBar
-import mai.project.news_app.presentation.navgraph.Route
 import mai.project.news_app.ui.theme.NewsAppTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     articles: LazyPagingItems<Article>,
-    navigate: (String) -> Unit
+    navigateSearch: () -> Unit,
+    navigateDetails: (Article) -> Unit,
 ) {
     val titles by remember {
         derivedStateOf {
@@ -78,7 +78,7 @@ fun HomeScreen(
             text = "",
             readOnly = true,
             onValueChange = {},
-            onClick = { navigate(Route.SearchScreen.route) },
+            onClick = { navigateSearch() },
             onSearch = {},
         )
 
@@ -101,7 +101,7 @@ fun HomeScreen(
             modifier = Modifier.padding(horizontal = SmallPadding1),
             articles = articles,
         ) { article ->
-            navigate(Route.DetailsScreen.route)
+            navigateDetails(article)
         }
     }
 }
@@ -116,7 +116,8 @@ fun HomeScreenPreview() {
             val mockArticles = listOf(Article.sample)
             HomeScreen(
                 articles = flowOf(PagingData.from(mockArticles)).collectAsLazyPagingItems(),
-                navigate = {}
+                navigateSearch = {},
+                navigateDetails = { }
             )
         }
     }

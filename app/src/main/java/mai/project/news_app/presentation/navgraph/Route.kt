@@ -22,6 +22,8 @@ sealed class Route(
 
     /**
      * 新聞導航畫面
+     *
+     * - 這個畫面是用來導航到其他畫面的
      */
     data object NewsNavigatorScreen : Route("news_navigator_screen")
 

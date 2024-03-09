@@ -1,12 +1,15 @@
 package mai.project.news_app.domain.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 import mai.project.news_app.util.Constants.ARTICLE_TABLE
 
 @Entity(tableName = ARTICLE_TABLE)
+@Parcelize
 data class Article(
-    val author: String,
+    val author: String?,
     val title: String,
     val description: String,
     @PrimaryKey
@@ -15,7 +18,7 @@ data class Article(
     val publishedAt: String,
     val content: String,
     val source: Source
-) {
+) : Parcelable {
     companion object {
         val sample: Article
             get() {

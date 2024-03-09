@@ -13,18 +13,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.compose.collectAsLazyPagingItems
+import mai.project.news_app.domain.model.Article
 import mai.project.news_app.presentation.Dimens.MediumPadding1
 import mai.project.news_app.presentation.Dimens.SmallPadding1
 import mai.project.news_app.presentation.common.ArticleList
 import mai.project.news_app.presentation.common.SearchBar
-import mai.project.news_app.presentation.navgraph.Route
 import mai.project.news_app.ui.theme.NewsAppTheme
 
 @Composable
 fun SearchScreen(
     state: SearchState,
     event: (SearchEvent) -> Unit,
-    navigate: (String) -> Unit
+    navigateDetails: (Article) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -51,7 +51,7 @@ fun SearchScreen(
             ArticleList(
                 modifier = Modifier.padding(horizontal = SmallPadding1),
                 articles = articles,
-                onItemClick = { navigate(Route.DetailsScreen.route) }
+                onItemClick = { article -> navigateDetails(article) }
             )
         }
     }
@@ -67,7 +67,7 @@ fun SearchScreenPreview() {
             SearchScreen(
                 state = SearchState(),
                 event = {},
-                navigate = {}
+                navigateDetails = {}
             )
         }
     }

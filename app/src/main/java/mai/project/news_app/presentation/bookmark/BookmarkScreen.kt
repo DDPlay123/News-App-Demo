@@ -27,7 +27,7 @@ import mai.project.news_app.ui.theme.NewsAppTheme
 @Composable
 fun BookmarkScreen(
     state: BookmarkState,
-    navigate: (String) -> Unit
+    navigateDetails: (Article) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -45,7 +45,7 @@ fun BookmarkScreen(
 
         ArticleList(
             articles = state.articles,
-            onItemClick = { navigate(Route.DetailsScreen.route) }
+            onItemClick = { article -> navigateDetails(article) }
         )
     }
 }
@@ -61,7 +61,7 @@ fun BookmarkScreenPreview() {
                 state = BookmarkState().copy(
                     articles = listOf(Article.sample, Article.sample, Article.sample)
                 ),
-                navigate = {}
+                navigateDetails = {}
             )
         }
     }

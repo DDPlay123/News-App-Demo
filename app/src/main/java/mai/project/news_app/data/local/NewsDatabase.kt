@@ -7,7 +7,7 @@ import mai.project.news_app.domain.model.Article
 
 @Database(
     entities = [Article::class],
-    version = 1
+    version = 2
 )
 @TypeConverters(NewsTypeConvertor::class)
 abstract class NewsDatabase : RoomDatabase() {
