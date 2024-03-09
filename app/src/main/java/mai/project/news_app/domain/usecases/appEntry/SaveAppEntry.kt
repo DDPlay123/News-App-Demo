@@ -1,4 +1,4 @@
-package mai.project.news_app.domain.usecases
+package mai.project.news_app.domain.usecases.appEntry
 
 import mai.project.news_app.domain.manager.LocalUserManager
 

@@ -14,6 +14,17 @@ sealed class Route(
      */
     data object OnBoardingScreen : Route("onboarding_screen")
 
+    // -- 新聞導航 --
+    /**
+     * 新聞導航
+     */
+    data object NewsNavigation : Route("news_navigation")
+
+    /**
+     * 新聞導航畫面
+     */
+    data object NewsNavigatorScreen : Route("news_navigator_screen")
+
     /**
      * 主畫面
      */
@@ -33,15 +44,4 @@ sealed class Route(
      * 詳細畫面
      */
     data object DetailsScreen : Route("details_screen")
-
-    // -- 新聞導航 --
-    /**
-     * 新聞導航
-     */
-    data object NewsNavigation : Route("news_navigation")
-
-    /**
-     * 新聞導航畫面
-     */
-    data object NewsNavigatorScreen : Route("news_navigator_screen")
 }
